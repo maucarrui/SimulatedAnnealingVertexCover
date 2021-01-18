@@ -50,7 +50,7 @@ TEST_F(GraphTest, addEdge) {
     for (int i = 0; i < 10; i++)
         G.addVertex(Vertex(i, i, i, "test" + std::to_string(i)));
 
-    G.buildAjdMatrix();
+    G.buildAdjMatrix();
 
     int numEdges = 0;
     for (int i = 0; i < 10; i ++) {
@@ -100,8 +100,8 @@ TEST_F(GraphTest, buildAdjMatrix) {
 	        EXPECT_TRUE(G.existsEdge(j, i));
 	    }
 	    else {
-	        EXPECT_FALSE(G.existEdge(i, j));
-	        EXPECT_FALSE(G.existEdge(j, i));
+	        EXPECT_FALSE(G.existsEdge(i, j));
+	        EXPECT_FALSE(G.existsEdge(j, i));
 	    }
 	}
     }    
