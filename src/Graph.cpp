@@ -57,7 +57,7 @@ void Graph::buildSearchTable() {
 /**
  * Builds the adjacency matrix of the graph.
  * This method in only evoked when all the 
- * vertex and edges are added to the graph.
+ * vertices are added to the graph.
  */
 void Graph::buildAdjMatrix() {
     std::map<int, Vertex>::iterator it;
