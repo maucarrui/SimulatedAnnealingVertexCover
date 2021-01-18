@@ -1,6 +1,11 @@
 #include <map>
 #include <vector>
 
+#ifndef VERTEX_H
+#define VERTEX_H
+#include "Vertex.hpp"
+#endif
+
 class Graph {
     private:
 
