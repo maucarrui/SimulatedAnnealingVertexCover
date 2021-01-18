@@ -38,7 +38,7 @@ int Vertex::getX() {
  * Returns vertex's y-axis position.
  * @return vertex's y-axis position.
  */
-int Vertex::getX() {
+int Vertex::getY() {
     return this->yPos;
 }
 
