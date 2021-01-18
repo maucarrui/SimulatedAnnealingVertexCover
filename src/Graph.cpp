@@ -46,7 +46,10 @@ void Graph::addEdge(int u, int v) {
  * table returns the vertex's ID.
  */
 void Graph::buildSearchTable() {
-    index = 0;
+    std::map<int, Vertex>::iterator it;
+    int index = 0;
+    int ID;
+
     for (it = vertices.begin(); it != vertices.end(); it++) {
         ID = it->first;
 	searchTable.emplace(index, ID);
@@ -60,10 +63,6 @@ void Graph::buildSearchTable() {
  * vertices are added to the graph.
  */
 void Graph::buildAdjMatrix() {
-    std::map<int, Vertex>::iterator it;
-    int ID;
-    int index;
-
     // Resize adjacency matrix for it to be of size |V| x |V|.
     adjacencyMatrix.resize(numVertices, std::vector<double>(numVertices));
 
