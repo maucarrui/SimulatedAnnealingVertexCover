@@ -36,7 +36,7 @@ TEST_F(GraphTest, addVertex) {
     for (int i = 0; i < 10; i++) {
         G.addVertex(Vertex(i, i, i, "test" + std::to_string(i)));
 	
-	EXPECT_EQ(i + 1, G.getNumVertices());
+	EXPECT_EQ(i + 2, G.getNumVertices());
     }
 }
 
@@ -75,7 +75,7 @@ TEST_F(GraphTest, buildAdjMatrix) {
     for (int i = 0; i < 10; i++) {
         G.addVertex(Vertex(i, i, i, "test" + std::to_string(i)));
 	
-	EXPECT_EQ(i + 1, G.getNumVertices());
+	EXPECT_EQ(i + 2, G.getNumVertices());
     }
 
     G.buildAdjMatrix();
