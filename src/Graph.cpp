@@ -3,36 +3,13 @@
 #include "Graph.hpp"
 #endif
 
-Graph::Vertex::Vertex(int _ID, int _xPos, int _yPos, std::string _name) {
-    this->ID   = _ID;
-    this->xPos = _xPos;
-    this->yPos = _yPos;
-    this->name = _name;
-}
-
-int Graph::Vertex::getID() {
-    return this->ID;
-}
-
-int Graph::Vertex::getX() {
-    return this->xPos;
-}
-
-int Graph::Vertex::getY() {
-    return this->yPos;
-}
-
-int Graph::Vertex::getname() {
-    return this->name;
-}
-
 Graph::Graph() {
     this->numVertices = 0;
     this->numEdges    = 0;
 }
 
-void Graph::addVertex(int ID, int xPos, int yPos, std::string name) {
-    Vertex v = Vertex(ID, xPos, yPos, name);
+void Graph::addVertex(Vertex v) {
+    int ID = v.getID();
     vertices.emplace(ID, v);
     numVertices++;
 }
@@ -42,7 +19,7 @@ void Graph::addEdge(int u, int v) {
     int numColumns = adjacencyMatrix[0].size();
 
     // TO DO: Return exception.
-    if ((numRows == 0) || numColumns == 0)
+    if ((numRows == 0) || (numColumns == 0))
         return;
 
     adjacencyMatrix[u][v] = 1;
@@ -51,19 +28,25 @@ void Graph::addEdge(int u, int v) {
     numEdges++;
 }
 
+void Graph::buildSearchTable() {
+    index = 0;
+    for (it = vertices.begin(); it != vertices.end(); it++) {
+        ID = it->first;
+	searchTable.emplace(index, ID);
+	index++;
+    }
+}
+
 void Graph::buildAdjMatrix() {
     std::map<int, Vertex>::iterator it;
     int ID;
     int index;
 
+    // Resize adjacency matrix for it to be of size |V| x |V|.
     adjacencyMatrix.resize(numVertices, std::vector<double>(numVertices));
 
-    index = 0;
-    for (it = adjacencyMatrix.begin; it != adjacencyMatrix; it++) {
-        ID = it->first;
-	searchTable(index, ID);
-	index++;
-    }
+    // Build search table.
+    buildSearchTable();
 }
 
 int Graph::getNumVertices() {

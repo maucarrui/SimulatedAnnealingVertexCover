@@ -4,16 +4,6 @@
 class Graph {
     private:
 
-        class Vertex {
-	    public:
-	        Vertex(int ID, int xPos, int yPos, std::string name);
-
-                int getID();
-	        int getX();
-	        int getY();
-	        std::string getName();
-	};
-
 	int numVertices;
         int numEdges;
 
@@ -21,11 +11,13 @@ class Graph {
         std::map<int, Vertex> vertices;
 
         std::vector<std::vector<double>> adjacencyMatrix;
+
+        void buildSearchTable();
     
     public:
         Graph();
 
-        void addVertex(int ID, int xPos, int yPos, std::string name);
+        void addVertex(Vertex v);
         void addEdge(int uID, int vID);
         
         void buildAdjMatrix();
