@@ -1,6 +1,11 @@
 #include "gtest/gtest.h"
 #include <string>
 
+#ifndef VERTEX_H
+#define VERTEX_H
+#include "../../src/Vertex.hpp"
+#endif
+
 #ifndef GRAPH_H
 #define GRAPH_H
 #include "../../src/Graph.hpp"
@@ -24,12 +29,12 @@ TEST_F(GraphTest, addVertex) {
 
     EXPECT_EQ(0, G.getNumVertices());
     
-    G.addVertex(0, 0, 0, "test1");
+    G.addVertex(Vertex(0, 0, 0, "test"));
     
     EXPECT_EQ(1, G.getNumVertices());
 
     for (int i = 0; i < 10; i++) {
-        G.addVertex(i, i, i, "test" + std::to_string(i));
+        G.addVertex(Vertex(i, i, i, "test" + std::to_string(i)));
 	
 	EXPECT_EQ(i + 1, G.getNumVertices());
     }
@@ -40,10 +45,10 @@ TEST_F(GraphTest, addEdge) {
 
     EXPECT_EQ(0, G.getNumEdges());
     
-    G.addVertex(0, 0, 0, "test1");
+    G.addVertex(Vertex(0, 0, 0, "test"));
 
     for (int i = 0; i < 10; i++)
-        G.addVertex(i, i, i, "test" + std::to_string(i));
+        G.addVertex(Vertex(i, i, i, "test" + std::to_string(i)));
 
     G.buildAjdMatrix();
 
@@ -63,12 +68,12 @@ TEST_F(GraphTest, buildAdjMatrix) {
     EXPECT_EQ(0, G.getNumVertices());
     EXPECT_EQ(0, G.getNumEdges());
     
-    G.addVertex(0, 0, 0, "test1");
+    G.addVertex(Vertex(0, 0, 0, "test1"));
     
     EXPECT_EQ(1, G.getNumVertices());
 
     for (int i = 0; i < 10; i++) {
-        G.addVertex(i, i, i, "test" + std::to_string(i));
+        G.addVertex(Vertex(i, i, i, "test" + std::to_string(i)));
 	
 	EXPECT_EQ(i + 1, G.getNumVertices());
     }
@@ -100,4 +105,10 @@ TEST_F(GraphTest, buildAdjMatrix) {
 	    }
 	}
     }    
+}
+
+int main(int argc, char **argv) {
+    testing::InitGoogleTest(&argc, argv);
+
+    return RUN_ALL_TESTS();
 }
