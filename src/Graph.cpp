@@ -98,6 +98,37 @@ bool Graph::existsEdge(int u, int v) {
 }
 
 /**
+ * Returns the number of edges that are covered 
+ * by a vertex cover.
+ * @param s The vertex cover.
+ * @return  The number of edged that are covered.
+ */
+int Graph::numCoveredEdges(Solution s) {
+    std::vector<bool> cover = s.getCover();
+    int edges = 0;
+    int i, j;
+
+    for (i = 0; i < numVertices; i++)
+        for (j = 0; j < numVertices; j++)
+            if ( (cover[i] || cover[j]) && adjacencyMatrix[i][j] )
+                edges++;
+
+    return edges / 2;
+}
+
+/**
+ * Returns whether or not the solution
+ * covers all of the edges of the graph.
+ * @param s The vertex cover.
+ * @return  True if the cover is feasible,
+ *    false otherwise.
+ */
+bool Graph::isFeasibleCover(Solution s) {
+    int e = numCoveredEdges(s);
+    return (e == numEdges);
+}
+
+/**
  * Returns a string representation in svg 
  * of the graph.
  * @return A string representation of the graph.

@@ -6,6 +6,11 @@
 #include "Vertex.hpp"
 #endif
 
+#ifndef SOLUTION_H
+#define SOLUTION_H
+#include "Solution.hpp"
+#endif
+
 class Graph {
     private:
 
@@ -31,6 +36,10 @@ class Graph {
         int getNumEdges();
 
         bool existsEdge(int u, int v);
+
+        int numCoveredEdges(Solution s);
+
+        bool isFeasibleCover(Solution s);
 
         std::string toString();
 };
