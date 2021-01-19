@@ -107,6 +107,102 @@ TEST_F(GraphTest, buildAdjMatrix) {
     }    
 }
 
+TEST_F(GraphTest, numCoveredEdges) {
+    std::vector<bool> cover;
+
+    Graph G = Graph();
+
+    G.addVertex(Vertex(0, 0, 0, "A"));
+    G.addVertex(Vertex(1, 0, 1, "B"));
+    G.addVertex(Vertex(2, 1, 1, "C"));
+    G.addVertex(Vertex(3, 1, 0, "D"));
+
+    G.buildAdjMatrix();
+
+    G.addEdge(0, 1);
+    G.addEdge(0, 3);
+    G.addEdge(1, 2);
+    G.addEdge(2, 3);
+
+    Solution sx = Solution(G.getNumVertices());
+    
+    EXPECT_EQ(0, G.numCoveredEdges(sx));
+
+    Solution sy = sx.generateNeighbor();
+
+    EXPECT_EQ(2, G.numCoveredEdges(sy));
+
+    for (int i = 0; i < 4; i++) {
+        if (i == 0 || i == 1)
+            cover.push_back(true);
+        else
+            cover.push_back(false);
+    }
+
+    Solution sz = Solution(cover, 2);
+
+    EXPECT_EQ(3, G.numCoveredEdges(sz));
+
+    Solution sw = Solution(G.getNumVertices());
+    
+    cover = sw.getCover();
+    
+    cover[1] = true;
+    cover[3] = true;
+    
+    sw = Solution(cover, 2);
+
+    EXPECT_EQ(4, G.numCoveredEdges(sw));
+}
+
+TEST_F(GraphTest, isFeasibleCover) {
+    std::vector<bool> cover;
+
+    Graph G = Graph();
+
+    G.addVertex(Vertex(0, 0, 0, "A"));
+    G.addVertex(Vertex(1, 0, 1, "B"));
+    G.addVertex(Vertex(2, 1, 1, "C"));
+    G.addVertex(Vertex(3, 1, 0, "D"));
+
+    G.buildAdjMatrix();
+
+    G.addEdge(0, 1);
+    G.addEdge(0, 3);
+    G.addEdge(1, 2);
+    G.addEdge(2, 3);
+
+    Solution sx = Solution(G.getNumVertices());
+    
+    EXPECT_FALSE(G.isFeasibleCover(sx));
+
+    Solution sy = sx.generateNeighbor();
+
+    EXPECT_FALSE(G.isFeasibleCover(sy));
+
+    for (int i = 0; i < 4; i++) {
+        if (i == 0 || i == 1)
+            cover.push_back(true);
+        else
+            cover.push_back(false);
+    }
+
+    Solution sz = Solution(cover, 2);
+
+    EXPECT_FALSE(G.isFeasibleCover(sz));
+
+    Solution sw = Solution(G.getNumVertices());
+    
+    cover = sw.getCover();
+    
+    cover[1] = true;
+    cover[3] = true;
+    
+    sw = Solution(cover, 2);
+
+    EXPECT_TRUE(G.isFeasibleCover(sw));
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
 
