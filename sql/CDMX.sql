@@ -13,7 +13,7 @@ CREATE TABLE aristas (
     id_destino  INTEGER,
     PRIMARY KEY (id_origen, id_destino),
     FOREIGN KEY (id_origen) REFERENCES vertices(id),
-    FOREIGN KEY (id_trabajador) REFERENCES vertices(id)
+    FOREIGN KEY (id_destino) REFERENCES vertices(id)
 );
 
 INSERT INTO vertices VALUES (1, 324, 213, "Azcapotzalco");  
