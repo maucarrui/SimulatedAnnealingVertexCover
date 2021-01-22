@@ -45,3 +45,5 @@ INSERT INTO aristas VALUES (8, 9);
 INSERT INTO aristas VALUES (9, 10);
 INSERT INTO aristas VALUES (9, 11);
 INSERT INTO aristas VALUES (11, 12);
+
+COMMIT;
