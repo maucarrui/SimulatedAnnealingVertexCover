@@ -16,7 +16,7 @@ CREATE TABLE aristas (
     FOREIGN KEY (id_destino) REFERENCES vertices(id)
 );
 
-INSERT INTO vertices VALUES (1, 199, 54, "Washington);
+INSERT INTO vertices VALUES (1, 199, 54, "Washington");
 INSERT INTO vertices VALUES (2, 101, 123, "Oregon");
 INSERT INTO vertices VALUES (3, 67, 268, "California");
 INSERT INTO vertices VALUES (4, 193, 141, "Idaho");
