@@ -98,7 +98,7 @@ std::vector<Vertex> DAO::getVertices() {
         ID   = sqlite3_column_int(stmt, 0);
 	xPos = sqlite3_column_double(stmt, 1);
 	yPos = sqlite3_column_double(stmt, 2);
-        name = std::string( (char *) sqlite3_column_text(stmt, 1) );
+        name = std::string( (char *) sqlite3_column_text(stmt, 3) );
 	
 	Vertex v = Vertex(ID, xPos, yPos, name);
 	vertices.push_back(v);
