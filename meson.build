@@ -7,7 +7,8 @@ dependencies = [dependency('sqlite3'), dependency('gtest')]
 src = ['src/Graph.cpp',
        'src/main.cpp',
        'src/Vertex.cpp',
-       'src/Solution.cpp']
+       'src/Solution.cpp',
+       'src/DAO.cpp']
 
 incdir = include_directories('src')
 
@@ -33,6 +34,13 @@ solution_test = executable('Solution Test',
                             'src/Solution.cpp'],
                            dependencies : dependencies)
 
+dao_test = executable('DAO Test',
+                      ['test/src/DAO_Test.cpp',
+                       'src/Vertex.cpp',
+                       'src/DAO.cpp'],
+                      dependencies : dependencies)
+
 test('Vertex tests', vertex_test)
 test('Graph tests', graph_test)
 test('Solution tests', solution_test)
+test('DAO tests', dao_test)
