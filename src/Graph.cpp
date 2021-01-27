@@ -41,9 +41,46 @@ void Graph::addEdge(int u, int v) {
 }
 
 /**
+ *
+ */
+int Graph::getIndexOf(int ID) {
+    std::map<int, int>::iterator it;
+    it = searchTable.find(ID);
+
+    return it->second;
+}
+
+/**
+ * Adds a set of vertices to the graph.
+ * @param vs The set of vertices that will be added to the graph.
+ */
+void Graph::addVertices(std::vector<Vertex> vs) {
+    std::vector<Vertex>::iterator it;
+
+    for (it = vs.begin(); it != vs.end(); it++)
+        addVertex(*it);
+}
+
+/**
+ * Adds a set of edges to the graph.
+ * @param vs The set of edges that will be added to the graph.
+ */
+void Graph::addEdges(std::vector<std::pair<int, int>> es) {
+    std::vector<std::pair<int, int>>::iterator it;
+    std::map<int, int>::iterator jt;
+    int u, v;
+
+    for (it = es.begin(); it != es.end(); it++) {
+        u = getIndexOf(it->first);
+	v = getIndexOf(it->second);
+	addEdge(u, v);
+    }
+}
+
+/**
  * Builds the search table for the vertices.
- * Given the index of the vertex, the search 
- * table returns the vertex's ID.
+ * Given the ID of the vertex, the search 
+ * table returns the vertex's index.
  */
 void Graph::buildSearchTable() {
     std::map<int, Vertex>::iterator it;
@@ -52,7 +89,7 @@ void Graph::buildSearchTable() {
 
     for (it = vertices.begin(); it != vertices.end(); it++) {
         ID = it->first;
-	searchTable.emplace(index, ID);
+	searchTable.emplace(ID, index);
 	index++;
     }
 }
@@ -134,5 +171,53 @@ bool Graph::isFeasibleCover(Solution s) {
  * @return A string representation of the graph.
  */
 std::string Graph::toString() {
-    return "";
+    std::string svg;
+    std::map<int, Vertex>::iterator it, jt;
+    Vertex v, u;
+    int vID, uID;
+
+    svg  = "<svg width='";
+    svg += std::to_string(1000);
+    svg += "' height='";
+    svg += std::to_string(1000);
+    svg += "' fill='white'>\n";
+
+    // Edges
+    for (it = vertices.begin(); it != vertices.end(); it++) {
+        v   = it->second;
+	vID = getIndexOf(v.getID());
+
+        for (jt = vertices.begin(); jt != vertices.end(); jt++) {
+	    u   = jt->second;
+	    uID = getIndexOf(u.getID());
+
+	    if (existsEdge(vID, uID)) {
+	        svg += "    ";
+	        svg += "<line x1='";
+		svg += std::to_string(v.getX());
+		svg += "' y1='";
+		svg += std::to_string(v.getY());
+		svg += "' x2='";
+		svg += std::to_string(u.getX());
+		svg += "' y2='";
+		svg += std::to_string(u.getY());
+		svg += "' stroke='black' stroke-width='2' /> \n";
+	    }
+	}
+    }
+
+    // Vertices
+    for (it = vertices.begin(); it != vertices.end(); it++) {
+        v = it->second;
+
+	svg += "    "; //Indentation.
+	svg += "<circle cx='";
+	svg += std::to_string(v.getX());
+	svg += "' cy='";
+	svg += std::to_string(v.getY());
+	svg += "' r='5' stroke='black' stroke-width='3'/> \n";
+    }
+
+    svg += "</svg>";
+    return svg;
 }

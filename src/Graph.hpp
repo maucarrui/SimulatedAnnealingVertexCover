@@ -23,12 +23,17 @@ class Graph {
         std::vector<std::vector<double>> adjacencyMatrix;
 
         void buildSearchTable();
+
+        int getIndexOf(int ID);
     
     public:
         Graph();
 
         void addVertex(Vertex v);
         void addEdge(int uID, int vID);
+
+        void addVertices(std::vector<Vertex> vs);
+        void addEdges(std::vector<std::pair<int, int>> es);
         
         void buildAdjMatrix();
 
