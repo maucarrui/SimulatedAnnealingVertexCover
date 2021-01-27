@@ -8,6 +8,7 @@ class Vertex {
         std::string name;
 
     public:
+        Vertex();
         Vertex(int _ID, int _xPos, int _yPos, std::string _name);
 
         int getID();

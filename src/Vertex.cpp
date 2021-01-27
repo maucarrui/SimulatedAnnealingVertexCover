@@ -4,6 +4,11 @@
 #endif
 
 /**
+ * Default constructor.
+ */
+Vertex::Vertex() {}
+
+/**
  * Vertex constructor.
  *
  * @param _ID   The vertex's ID.
