@@ -78,3 +78,19 @@ Solution Solution::generateNeighbor() {
 
     return Solution(newCover, newSize);
 }
+
+/**
+ * Sets the cost of the solution.
+ * @param cost The new cost of the solution.
+ */
+void Solution::setCost(double cost) {
+    this->cost = cost;
+}
+
+/**
+ * Returns the cost of the solution.
+ * @return The cost of the solution.
+ */
+double Solution::getCost() {
+    return this->cost;
+}

@@ -5,6 +5,7 @@ class Solution {
     private:
         std::vector<bool> cover;
         int _size;
+        double cost;
 
     public:
         Solution(int numVertices);
@@ -17,4 +18,7 @@ class Solution {
         std::vector<bool> getCover();
         
         Solution generateNeighbor();
+
+        void   setCost(double cost);
+        double getCost();
 };
