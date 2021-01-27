@@ -11,6 +11,11 @@
 #include "Graph.hpp"
 #endif
 
+#ifndef DAO_H
+#define DAO_H
+#include "DAO.hpp"
+#endif
+
 /**
  * Returns the usage of this program.
  * @return The usage of this program.
@@ -31,19 +36,29 @@ int main(int argc, char** argv) {
 	return -1;
     }
 
+    // Get the path of the sqlite file and the RNG seed.
+    std::string pathDB = argv[1];
+    int seed           = std::stoi(argv[2]);
+
+    // Set the seed for the RNG.
+    std::srand(seed);
+
+    // Get the DAO.
+    DAO dao = DAO(pathDB);
+    dao.openDB();
+
+    // Get all the vertices and edges.
+    std::vector<Vertex> vertices           = dao.getVertices();
+    std::vector<std::pair<int, int>> edges = dao.getEdges();
+
+    // Close the conection to the DB.
+    dao.closeDB();
+    
+    // Build the graph.
     Graph G = Graph();
-
-    Vertex a = Vertex(0, 0, 0, "A");
-    Vertex b = Vertex(1, 1, 1, "B");
-    Vertex c = Vertex(2, 2, 0, "C");
-
-    G.addVertex(a);
-    G.addVertex(b);
-    G.addVertex(c);
-
+    G.addVertices(vertices);
     G.buildAdjMatrix();
+    G.addEdges(edges);
 
-    G.addEdge(0, 1);
-    G.addEdge(0, 2);
-    G.addEdge(1, 2);
+    std::cout << G.toString() << std::endl;
 }
