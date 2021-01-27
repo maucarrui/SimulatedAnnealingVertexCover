@@ -16,6 +16,11 @@
 #include "DAO.hpp"
 #endif
 
+#ifndef SOLUTION_H
+#define SOLUTION_H
+#include "Solution.hpp"
+#endif
+
 /**
  * Returns the usage of this program.
  * @return The usage of this program.
@@ -60,5 +65,12 @@ int main(int argc, char** argv) {
     G.buildAdjMatrix();
     G.addEdges(edges);
 
-    std::cout << G.toString() << std::endl;
+    //std::cout << G.toString() << std::endl;
+
+    // Create an initial solution.
+    int numVertices = G.getNumVertices();
+    Solution s = Solution(numVertices);
+    s.shuffle();
+    
+    std::cout << G.printSolution(s) << std::endl;
 }
