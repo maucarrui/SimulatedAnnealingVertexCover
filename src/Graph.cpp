@@ -167,6 +167,78 @@ bool Graph::isFeasibleCover(Solution s) {
 
 /**
  * Returns a string representation in svg 
+ * of the given solution.
+ * @return A string representation of the solution.
+ */
+std::string Graph::printSolution(Solution s) {
+    std::string svg;
+    std::map<int, Vertex>::iterator it, jt;
+    Vertex v, u;
+    int vID, uID;
+
+    std::vector<bool> cover = s.getCover();
+
+    svg  = "<svg width='";
+    svg += std::to_string(1000);
+    svg += "' height='";
+    svg += std::to_string(1000);
+    svg += "' fill='white'>\n";
+
+    // Edges
+    for (it = vertices.begin(); it != vertices.end(); it++) {
+        v   = it->second;
+	vID = getIndexOf(v.getID());
+
+        for (jt = vertices.begin(); jt != vertices.end(); jt++) {
+	    u   = jt->second;
+	    uID = getIndexOf(u.getID());
+
+	    if (existsEdge(vID, uID)) {
+	        svg += "    ";
+	        svg += "<line x1='";
+		svg += std::to_string(v.getX());
+		svg += "' y1='";
+		svg += std::to_string(v.getY());
+		svg += "' x2='";
+		svg += std::to_string(u.getX());
+		svg += "' y2='";
+		svg += std::to_string(u.getY());
+		
+		if (cover[uID] || cover[vID])
+		    svg += "' stroke='blue'";
+		else
+		    svg += "' stroke='black'";
+
+		svg += " stroke-width='2' /> \n";
+	    }
+	}
+    }
+
+    // Vertices
+    for (it = vertices.begin(); it != vertices.end(); it++) {
+        v   = it->second;
+	vID = getIndexOf(v.getID());
+
+	svg += "    "; //Indentation.
+	svg += "<circle cx='";
+	svg += std::to_string(v.getX());
+	svg += "' cy='";
+	svg += std::to_string(v.getY());
+	
+	if (cover[vID])
+	    svg += "' fill='blue'";
+	else
+	    svg += "' fill='white'";
+
+	svg += " r='5' stroke='black' stroke-width='3'/> \n";
+    }
+
+    svg += "</svg>";
+    return svg;
+}
+
+/**
+ * Returns a string representation in svg 
  * of the graph.
  * @return A string representation of the graph.
  */

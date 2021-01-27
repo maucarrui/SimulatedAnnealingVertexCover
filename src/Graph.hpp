@@ -47,4 +47,6 @@ class Graph {
         bool isFeasibleCover(Solution s);
 
         std::string toString();
+
+        std::string printSolution(Solution s);
 };
