@@ -21,6 +21,11 @@
 #include "Solution.hpp"
 #endif
 
+#ifndef HEURISTIC_H
+#define HEURISTIC_H
+#include "Heuristic.hpp"
+#endif
+
 /**
  * Returns the usage of this program.
  * @return The usage of this program.
@@ -68,9 +73,27 @@ int main(int argc, char** argv) {
     //std::cout << G.toString() << std::endl;
 
     // Create an initial solution.
-    int numVertices = G.getNumVertices();
-    Solution s = Solution(numVertices);
-    s.shuffle();
+    int numVertices          = G.getNumVertices();
+    Solution initialSolution = Solution(numVertices);
+    initialSolution.shuffle();
+
+    // Define the heuristic parameters.
+    double initialTemperature = 1000;
+    double coolingFactor      = 0.8;
+    double L                  = 2000;
+    double epsilon            = 0.0001;
+    double beta               = 10;
     
-    std::cout << G.printSolution(s) << std::endl;
+    Heuristic H = Heuristic(G,
+			    initialSolution,
+			    initialTemperature,
+			    coolingFactor,
+			    L,
+			    epsilon,
+			    beta);
+
+    H.thresholdAcceptance();
+
+    //std::cout << H.printStatus() << std::endl;
+    std::cout << G.printSolution(H.getBestSolution()) << std::endl;
 }
