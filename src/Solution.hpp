@@ -8,6 +8,7 @@ class Solution {
         double cost;
 
     public:
+        Solution();
         Solution(int numVertices);
         Solution(std::vector<bool> _cover, int _size);
 

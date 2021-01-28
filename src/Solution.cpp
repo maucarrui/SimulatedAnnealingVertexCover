@@ -1,7 +1,10 @@
-#ifndef SOLUTION_H
-#define SOLUTION_H
 #include "Solution.hpp"
-#endif
+#include <iostream>
+
+/**
+ * Default constructor.
+ */
+Solution::Solution() {}
 
 /**
  * Solution constructor when only given the number of vertices
@@ -34,10 +37,12 @@ void Solution::shuffle() {
 
     for (int i = 0; i < numVertices; i++) {
         r = ( (double) rand() / (RAND_MAX) );
-	if (r <= 0.5)
+	if (r <= 0.5) {
 	    cover[i] = false;
-	else
+	} else {
 	    cover[i] = true;
+	    this->_size++;
+	}
     }
 }
 
@@ -46,7 +51,14 @@ void Solution::shuffle() {
  * @return The size of the cover.
  */
 int Solution::size() {
-    return this->_size;
+    int numVertices = this->cover.size();
+    int coverSize = 0;
+
+    for (int i = 0; i < numVertices; i++)
+        if (this->cover[i])
+	    coverSize++;
+    
+    return coverSize;
 }
 
 /**
@@ -67,16 +79,14 @@ Solution Solution::generateNeighbor() {
 
     int numVertices = cover.size();
     int r           = rand() % (numVertices + 1);
-    int newSize     = _size;
-
-    if (newCover[r])
-        newSize--;
-    else
-        newSize++;
+    int realSize    = 0;
 
     newCover[r] = !newCover[r];
+    for (int i = 0; i < numVertices; i++)
+        if (newCover[i])
+	    realSize++;
 
-    return Solution(newCover, newSize);
+    return Solution(newCover, realSize);
 }
 
 /**
