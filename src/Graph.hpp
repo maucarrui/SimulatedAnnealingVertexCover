@@ -24,7 +24,7 @@ class Graph {
 
         void buildSearchTable();
 
-        int getIndexOf(int ID);
+        int getIndexOf(int ID) const;
     
     public:
         Graph();
@@ -38,15 +38,16 @@ class Graph {
         void buildAdjMatrix();
 
         int getNumVertices();
-        int getNumEdges();
+        int getNumEdges() const;
 
         bool existsEdge(int u, int v);
 
-        int numCoveredEdges(Solution s);
+        int numCoveredEdges(Solution s) const;
 
         bool isFeasibleCover(Solution s);
 
         std::string toString();
 
+        std::string toStringSolution(Solution s) const;
         std::string printSolution(Solution s);
 };

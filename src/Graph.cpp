@@ -1,7 +1,5 @@
-#ifndef GRAPH_H
-#define GRAPH_H
 #include "Graph.hpp"
-#endif
+#include <iostream>
 
 /**
  * Graph constructor.
@@ -43,8 +41,8 @@ void Graph::addEdge(int u, int v) {
 /**
  *
  */
-int Graph::getIndexOf(int ID) {
-    std::map<int, int>::iterator it;
+int Graph::getIndexOf(int ID) const {
+    std::map<int, int>::const_iterator it;
     it = searchTable.find(ID);
 
     return it->second;
@@ -119,7 +117,7 @@ int Graph::getNumVertices() {
  * Returns the number of edges in the graph.
  * @return The number of edges in the graph.
  */
-int Graph::getNumEdges() {
+int Graph::getNumEdges() const {
     return this->numEdges;
 }
 
@@ -140,7 +138,7 @@ bool Graph::existsEdge(int u, int v) {
  * @param s The vertex cover.
  * @return  The number of edged that are covered.
  */
-int Graph::numCoveredEdges(Solution s) {
+int Graph::numCoveredEdges(Solution s) const {
     std::vector<bool> cover = s.getCover();
     int edges = 0;
     int i, j;
@@ -163,6 +161,46 @@ int Graph::numCoveredEdges(Solution s) {
 bool Graph::isFeasibleCover(Solution s) {
     int e = numCoveredEdges(s);
     return (e == numEdges);
+}
+
+/**
+ * Returns a string representation of the solution.
+ * @return A string representation of the solution.
+ */
+std::string Graph::toStringSolution(Solution s) const {
+    std::map<int, Vertex>::const_iterator it;
+    std::string str;
+    Vertex v;
+    int vIndex, coveredVertices, covered;
+
+    std::vector<bool> cover = s.getCover();
+
+    str             = "Cover: {";
+    coveredVertices = s.size();
+    covered         = 0;
+
+    for (it = vertices.begin(); it != vertices.end(); it++) {
+        v      = it->second;
+	vIndex = getIndexOf(v.getID());
+
+        if (cover[vIndex]) {
+	    str += v.getName();
+	    covered++;
+	    
+	    if (coveredVertices == covered)
+	        str += "}\n";
+	    else
+	        str += ", ";
+	}
+    }
+
+    str += "Covered Edges: ";
+    str += std::to_string(numCoveredEdges(s));
+    str += "/";
+    str += std::to_string(numEdges);
+    str += "\n";
+
+    return str;
 }
 
 /**
