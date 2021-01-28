@@ -8,7 +8,8 @@ src = ['src/Graph.cpp',
        'src/main.cpp',
        'src/Vertex.cpp',
        'src/Solution.cpp',
-       'src/DAO.cpp']
+       'src/DAO.cpp',
+       'src/Heuristic.cpp']
 
 incdir = include_directories('src')
 
