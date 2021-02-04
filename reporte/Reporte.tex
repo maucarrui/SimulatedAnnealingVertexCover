@@ -1,0 +1,114 @@
+\documentclass{article}
+
+% Márgenes.
+\usepackage{geometry}
+\addtolength{\hoffset}{-0.2cm}
+\addtolength{\textwidth}{0.4cm}
+\addtolength{\voffset}{-0.5cm}
+\addtolength{\textheight}{1cm}
+
+% Caracteres especiales del español.
+\usepackage[utf8]{inputenc}
+
+% Para el lenguaje español.
+\usepackage[spanish]{babel}
+
+% Símbolos matemáticos
+\usepackage{amssymb}
+
+% Binomio de Newton.
+\usepackage{amsmath}
+
+% Imágenes
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+
+% Algoritmos
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+
+% Para que los figuras se queden en su lugar.
+\usepackage{float}
+
+% Macros.
+\newcommand{\tbf}[1]{\textbf{#1}}
+
+\newcommand{\tit}[1]{\textit{#1}}
+
+\newcommand{\ttt}[1]{\texttt{#1}}
+
+\newcommand{\np}{\mathcal{NP}}
+
+% Título y autor del reporte.
+\title{Uso de la Heurística de Aceptación por Umbrales para Resolver
+       el Problema de la Cubierta de Vertices (Vertex Cover)}
+\author{Carrasco-Ruiz Mauricio  \\
+	maucarrui@ciencias.unam.mx  \\
+        Universidad Nacional Autónoma de México (UNAM) \\
+        Facultad de Ciencias \\
+        Heurísiticas de Optimización Combinatoria \\
+	}
+
+% Fecha de hoy.
+\date{\today} 
+
+\begin{document}
+  \maketitle
+
+  \begin{abstract}
+    Dada una gráfica $G = (V, E)$, el problema de la cubierta 
+    de vértices es un problema de optimización combinatoria en 
+    donde se busca encontrar el mínimo conjunto de vértices $X$
+    de tal forma que cualquier arista en la gráfica sea adyacente
+    a uno de los vértices en $X$. Se optó por utilizar la heurística
+    de aceptación por umbrales para resolver este problema, y su 
+    implementación fue llevada a cabo en C++. La experimentación
+    se hizo sobre 4 gráficas planas con diferentes cantidades de 
+    vértices y aristas cada una. Y para cada una de las gráficas 
+    la heurística logro encontrar un conjunto mínimo que cubriera 
+    a toda la gráfica. Concluyendo así que la huerística escogida 
+    es una buena alternativa para poder resolver el problema de
+    la cubierta de vértices.
+  \end{abstract}
+
+  \section{Introducción} \label{intro}
+  
+  \subsection{El Problema de la Cubierta de Vértices (Vertex Cover)}
+  Sea $G = (V, E)=$ una gráfica en donde $V$ es el conjunto de 
+  vértices y $E$ el conjunto de aristas. \\
+
+  \tbf{Definición:} Sea $X \subseteq V$, se dice que $X$ es una 
+  cubierta si y sólo si para cada $uv \in E$ se tiene que 
+  $u \in X$ ó $v \in X$. \\
+
+  El problema de la cubierta de vértices, como su nombre lo dice, 
+  consiste en encontrar esta cubierta de vértices. Su versión de 
+  decisión de este problema es famoso por ser uno de los 21 
+  problemas $\np$-completos de Karp. Sin embargo la versión que nos 
+  interesa para este trabajo es su versión de optimización, la 
+  cual consiste en encontrar la mínima cubierta de vértices de una
+  gráfica; esta versión se encuentra en la clase $\np$-duro.
+
+  Al ser un problema $\np$-duro, no se si sabe si existe o no 
+  un algoritmo que lo pueda resolver en tiempo polinomial, por ello
+  se han desarrollado una gran cantidad de algoritmos y heurísticas 
+  que intentan dar una proximación a la solución de este problema. 
+  Entre los más famosos se encuentra el algoritmo glotón
+  que logra encontrar una cubierta pero no asegura que sea la mínima,
+  y lo mismo pasa con muchas otras huerísticas.
+
+  Para este trabajo se decidio trabajar con una variante del 
+  recocido simulado: la aceptación por umbrales. Y ver qué tan
+  buena alternativa es para resolver el problema de la cubierta
+  de vértices. 
+
+  Cabe mencionar que las gráficas sobre las que se trabajaron fueron 
+  gráficas planas, pues es muy fácil que se tome un conjunto de vértices
+  y se observe que hay un número elevado de aristas que son cubiertas por 
+  múltiples vértices de la cubierta; resultando en un reto encontrar 
+  la cubierta de tal forma que el número de aristas repetidas sea el 
+  menor posible.
+
+  \subsection{Aceptación por Umbrales (Threshold Acceptance)}
+  
+  
+\end{document}
