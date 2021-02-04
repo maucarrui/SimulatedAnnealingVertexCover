@@ -109,6 +109,50 @@
   menor posible.
 
   \subsection{Aceptación por Umbrales (Threshold Acceptance)}
-  
+  Para que podamos abordar sobre la heurística de Aceptación por Umbrales,
+  es necesario que primero hablemos sobre el Recocido Simulado.
+
+  La heurística del Recocido Simulado fue propuesa en 1983 por
+  Scott Kirkpatrick, Daniel Gelatt y Mario Vecchi. Como su nombre
+  lo indica, se trata de simular la técnica de \tit{recocido}
+  utilizada en la metalurgía para deformar y fortalezer metales sin 
+  que esta manipulación presente un defecto sobre ellos. Esto lo 
+  consiguen primero calentando el metal a altas temperaturas,
+  esperando a que se enfríe un poco, lo deforman y se repite hasta
+  que se obtenga la forma deseada.
+
+  Así, dentro de la computación, el objetivo del Recocido Simulado
+  es ``calentar'' una solución e irla deformando poco a poco 
+  mediante el enfriamiento hasta que la solución que nos quede 
+  sea factible y lo \tit{suficientemente} buena.
+
+  La Aceptación por Umbrales, propuesta en 1990 por Gunter Duek y
+  Tobias Scheuer, heredó toda la metodología del Recocido
+  Simulado y además agrego una nueva forma de aceptar o rechazar
+  soluciones dependiendo de si estas superaban o no un umbral.
+  Los parametros de la huerística son una temperatura initial $T$,
+  una solución inicial $s$, una función $N: S \rightarrow S$ que
+  recibe una solución y regresa a un vecino de esta solución, 
+  un factor de enfriamiento $\phi$, y una función de costo 
+  $f: S \rightarrow \mathbb{R}$ que recibe una solución y regresa
+  su costo.
+
+  En un principio, la idea de la huerística es generar un lote 
+  de vecinos de $s$, y evaluar para cada vecino $s'$ si se 
+  cumple que $f(s') < f(s) + T$. Si para alguno de ellos se cumple
+  lo anterior, entonces descartamos a $s$ y nuestra solución actual 
+  será $s'$; se dice entonces que $s'$ fue aceptada. Después
+  multiplicamos a $\phi$ por $T$ y esta será nuestra nueva 
+  temperatura. Y repetimos este procedimiento hasta que 
+  $T < \varepsilon$ o se tenga un limite para la cantidad de veces 
+  que se van a repetir los pasos anteriores.
+
+  \section{Desarrollo} \label{development}
+
+  \section{Experimentación y Resultados} \label{results}
+
+  \section{Discusión} \label{discussion}
+
+  \section{Conclusión} \label{conclussion}
   
 \end{document}
