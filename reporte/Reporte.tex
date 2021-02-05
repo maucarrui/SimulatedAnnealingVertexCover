@@ -7,6 +7,9 @@
 \addtolength{\voffset}{-0.5cm}
 \addtolength{\textheight}{1cm}
 
+% Multicolumnas
+\usepackage{multicol}
+
 % Caracteres especiales del español.
 \usepackage[utf8]{inputenc}
 
@@ -22,6 +25,9 @@
 % Imágenes
 \usepackage{graphicx}
 \graphicspath{ {./img/} }
+
+% SVG
+\usepackage{svg}
 
 % Algoritmos
 \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
@@ -131,21 +137,22 @@
   Simulado y además agrego una nueva forma de aceptar o rechazar
   soluciones dependiendo de si estas superaban o no un umbral.
   Los parametros de la huerística son una temperatura initial 
-  $T \in mathbb{R}^+$, una solución inicial $s$, una función 
+  $T \in \mathbb{R}^+$, una solución inicial $s$, una función 
   $N: S \rightarrow S$ que recibe una solución y regresa a un vecino 
   de esta solución,  un factor de enfriamiento $\phi \in (0, 1)$, y 
   una función de costo $f: S \rightarrow \mathbb{R}$ que recibe 
   una solución y regresa su costo.
 
-  En un principio, la idea de la huerística es generar un lote 
+  En un principio, la idea de la huerística es generar un lote $L$
   de vecinos de $s$, y evaluar para cada vecino $s'$ si se 
   cumple que $f(s') < f(s) + T$. Si para alguno de ellos se cumple
   lo anterior, entonces descartamos a $s$ y nuestra solución actual 
   será $s'$; se dice entonces que $s'$ fue aceptada. Después
   multiplicamos a $\phi$ por $T$ y esta será nuestra nueva 
   temperatura. Y repetimos este procedimiento hasta que 
-  $T < \varepsilon$ o se tenga un limite para la cantidad de veces 
-  que se van a repetir los pasos anteriores.
+  $T < \varepsilon$, para una $\varepsilon < 1$; o se tenga un 
+  limite para la cantidad de veces que se van a repetir los pasos 
+  anteriores.
 
   \section{Desarrollo} \label{development}
 
@@ -231,7 +238,7 @@
   \paragraph{Huerística}
 
   La heurística de aceptación por umbrales trabaja directamente con 
-  la gráfica de nuestra instancia, con los parametros $T$ y $\phi$, 
+  la gráfica de nuestra instancia, con los parametros $T$, $\phi$ y $L$,
   con una solución inicial, con la función que genera vecinos $N$, y 
   con la función de costo $f$. Todo lo anterior, excepto la función de 
   costo, ya se ha definido.
@@ -346,7 +353,97 @@
   \end{enumerate}
 
   Se mostrará a continuación los mejores resultados que se consiguieron
-  con los parametros dados de la heurística.
+  modificando los parametros de la heurística.
+
+  \begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+      \multicolumn{7}{|c|}{Canadá}                                       \\
+      \hline
+      $T$  & $\phi$ & $L$  & $epsilon$ & $\beta$ & Semilla & Mejor costo \\
+      1000 & 0.8    & 2000 & 0.0001    & 10      & 11      & 0.400000    \\
+      500  & 0.8    & 2000 & 0.0001    & 10      & 79      & 0.400000    \\
+      1000 & 0.5    & 2000 & 0.0001    & 10      & 13      & 0.400000    \\
+      1000 & 0.8    & 200  & 0.0001    & 10      & 98      & 0.400000    \\
+      500  & 0.8    & 200  & 0.0001    & 10      & 38      & 0.400000    \\
+      500  & 0.8    & 200  & 0.0001    & 1       & 20      & 0.400000    \\
+      500  & 0.8    & 200  & 0.001     & 1       & 33      & 0.400000    \\
+      50   & 0.8    & 20   & 0.001     & 1       & 89      & 0.400000    \\
+      \hline
+    \end{tabular}
+  \end{center}
+
+  \begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+      \multicolumn{7}{|c|}{Ciudad de México}                             \\
+      \hline
+      $T$  & $\phi$ & $L$  & $epsilon$ & $\beta$ & Semilla & Mejor costo \\
+      1000 & 0.8    & 2000 & 0.0001    & 10      &  10     & 0.303030    \\
+      500  & 0.8    & 2000 & 0.0001    & 10      &  37     & 0.303030    \\
+      1000 & 0.5    & 2000 & 0.0001    & 10      &  4      & 0.303030    \\
+      1000 & 0.8    & 200  & 0.0001    & 10      &  19     & 0.303030    \\
+      500  & 0.8    & 200  & 0.0001    & 10      &  61     & 0.303030    \\
+      500  & 0.8    & 200  & 0.0001    & 1       &  36     & 0.303030    \\
+      500  & 0.8    & 200  & 0.001     & 1       &  45     & 0.303030    \\
+      50   & 0.8    & 20   & 0.001     & 1       &  84     & 0.303030    \\
+      \hline
+    \end{tabular}
+  \end{center}
+
+  \begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+      \multicolumn{7}{|c|}{México}                                       \\
+      \hline
+      $T$  & $\phi$ & $L$  & $epsilon$ & $\beta$ & Semilla & Mejor costo \\
+      1000 & 0.8    & 2000 & 0.0001    & 10      & 23      & 0.301587    \\
+      500  & 0.8    & 2000 & 0.0001    & 10      & 10      & 0.301587    \\
+      1000 & 0.5    & 2000 & 0.0001    & 10      & 91      & 0.301587    \\
+      1000 & 0.8    & 200  & 0.0001    & 10      & 56      & 0.317460    \\
+      500  & 0.8    & 200  & 0.0001    & 10      & 88      & 0.317460    \\
+      500  & 0.8    & 200  & 0.0001    & 1       & 12      & 0.317460    \\
+      500  & 0.8    & 200  & 0.001     & 1       & 38      & 0.317460    \\
+      50   & 0.8    & 20   & 0.001     & 1       & 73      & 0.317460    \\
+      \hline
+    \end{tabular}
+  \end{center}
+
+  \begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+      \multicolumn{7}{|c|}{Estados Unidos de América}                    \\
+      \hline
+      $T$  & $\phi$ & $L$  & $epsilon$ & $\beta$ & Semilla & Mejor costo \\
+      1000 & 0.8    & 2000 & 0.0001    & 10      & 29      & 0.310000    \\
+      500  & 0.8    & 2000 & 0.0001    & 10      & 1       & 0.300000    \\
+      1000 & 0.5    & 2000 & 0.0001    & 10      & 1       & 0.300000    \\
+      1000 & 0.8    & 200  & 0.0001    & 10      & 67      & 0.310000    \\
+      500  & 0.8    & 200  & 0.0001    & 10      & 4       & 0.310000    \\
+      500  & 0.8    & 200  & 0.0001    & 1       & 3       & 0.300000    \\
+      500  & 0.8    & 200  & 0.001     & 1       & 2       & 0.300000    \\
+      50   & 0.8    & 20   & 0.001     & 1       & 8       & 0.300000    \\
+      \hline
+    \end{tabular}
+  \end{center}
+
+  Cabe mencionar que aunque distintas semillas convergan al mismo costo,
+  esto no implica que sea la misma cubierta; por ejemplo:
+
+  \begin{figure}[H]
+    \centering
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[scale=0.35]{usa}
+    \end{minipage}%
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[scale=0.35]{usa2}
+    \end{minipage}
+    \caption{Dos cubiertas distintas del mapa de estados unidos pero con el mismo 
+      costo\\
+      ($T=50$, $\phi=0.8$, $L=20$, $\varepsilon = 0.001$, $\beta=1$, semillas 8 y 10)}
+  \end{figure}
 
   \section{Discusión} \label{discussion}
 
