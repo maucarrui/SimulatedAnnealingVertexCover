@@ -226,7 +226,7 @@ std::string Heuristic::printBestSolution() {
     std::string temp;
     temp += "===== BEST SOLUTION =====\n";
     temp += "Best cost: " + std::to_string(bestSolution.getCost()) + "\n";
-    temp += G.toStringSolution(bestSolution) + "\n";
+    temp += G.toStringSolution(bestSolution);
     return temp;
 }
 
@@ -235,5 +235,12 @@ std::string Heuristic::printBestSolution() {
  * @return A string representation of the best solution's cost.
  */
 std::string Heuristic::printBestCost() {
-     return std::to_string(bestSolution.getCost()) + "\n";
+    return std::to_string(bestSolution.getCost());
+}
+
+/**
+ * Returns a svg representation of the best solution.
+ */
+std::string Heuristic::printBestSolutionSVG() {
+    return G.printSolution(bestSolution);
 }

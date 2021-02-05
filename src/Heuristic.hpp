@@ -50,4 +50,5 @@ class Heuristic {
         std::string printBestSolution();
         std::string printStatus();
         std::string printBestCost();
+        std::string printBestSolutionSVG();
 };

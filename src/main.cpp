@@ -32,18 +32,39 @@
  */
 std::string usage() {
     std::string s = "";
-    s += "Usage: ./vc <datatabase.db> <randomSeed> \n";
+    s += "Usage: ./vc <datatabase.db> <randomSeed> [option]\n";
     s += "Arguments: \n";
-    s += "    <database.db>      The sqlite3 file containing all the information.\n";
-    s += "    <randomSeed>       The seed for the RNG.\n";
+    s += "    <database.db>  The sqlite3 file containing all the information.\n";
+    s += "    <randomSeed>   The seed for the RNG.\n";
+    s += "Options: \n";
+    s += "    --verbose      Prints a more detailed execution of the heuristic.\n";
+    s += "    --onlycost     Prints only the cost of the best found solution.\n";
+    s += "    --visual       Prints an svg representation of the graph and the solution.\n";
 
     return s;
 }
 
 int main(int argc, char** argv) {
-    if (argc != 3) {
+    int mode = -1;
+
+    if (argc < 3 || argc > 4) {
         std::cout << usage() << std::endl;
 	return -1;
+    } else if (argc == 4) {
+        std::string option0 = "--verbose";
+	std::string option1 = "--onlycost";
+	std::string option2 = "--visual";
+
+	if (!option0.compare(argv[3]))
+	    mode = 0;
+	else if (!option1.compare(argv[3]))
+	    mode = 1;
+	else if (!option2.compare(argv[3]))
+	    mode = 2;
+	else {
+	    std::cout << usage() << std::endl;
+	    return -1;
+	}
     }
 
     // Get the path of the sqlite file and the RNG seed.
@@ -93,7 +114,13 @@ int main(int argc, char** argv) {
 			    beta);
 
     H.thresholdAcceptance();
-
-    //std::cout << H.printStatus() << std::endl;
-    std::cout << G.printSolution(H.getBestSolution()) << std::endl;
+    
+    if (mode == -1)
+        std::cout << H.printBestSolution() << std::endl;
+    else if (mode == 0)
+        std::cout << H.printStatus() << std::endl;
+    else if (mode == 1)
+        std::cout << H.printBestCost() << std::endl;
+    else if (mode == 2)
+        std::cout << H.printBestSolutionSVG() << std::endl;
 }

@@ -128,7 +128,7 @@ int Graph::getNumEdges() const {
  * @param v The index of the vertex v.
  * @return True if the edge exists, false otherwise.
  */
-bool Graph::existsEdge(int u, int v) {
+bool Graph::existsEdge(int u, int v) const {
     return (adjacencyMatrix[u][v] == 1);
 }
 
@@ -208,9 +208,9 @@ std::string Graph::toStringSolution(Solution s) const {
  * of the given solution.
  * @return A string representation of the solution.
  */
-std::string Graph::printSolution(Solution s) {
+std::string Graph::printSolution(Solution s) const {
     std::string svg;
-    std::map<int, Vertex>::iterator it, jt;
+    std::map<int, Vertex>::const_iterator it, jt;
     Vertex v, u;
     int vID, uID;
 

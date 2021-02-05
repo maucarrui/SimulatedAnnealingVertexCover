@@ -40,7 +40,7 @@ class Graph {
         int getNumVertices();
         int getNumEdges() const;
 
-        bool existsEdge(int u, int v);
+        bool existsEdge(int u, int v) const;
 
         int numCoveredEdges(Solution s) const;
 
@@ -49,5 +49,5 @@ class Graph {
         std::string toString();
 
         std::string toStringSolution(Solution s) const;
-        std::string printSolution(Solution s);
+        std::string printSolution(Solution s) const;
 };
