@@ -440,13 +440,62 @@
       \centering
       \includegraphics[scale=0.35]{usa2}
     \end{minipage}
-    \caption{Dos cubiertas distintas del mapa de estados unidos pero con el mismo 
+    \caption{Dos cubiertas distintas del mapa de Estados Unidos pero con el mismo 
       costo\\
       ($T=50$, $\phi=0.8$, $L=20$, $\varepsilon = 0.001$, $\beta=1$, semillas 8 y 10)}
   \end{figure}
 
   \section{Discusión} \label{discussion}
 
+  Lo primero que podemos observar es que la mayoría de los experimentos realizados
+  convergen a una misma solución. Afortunadamente todas las soluciones a las que se 
+  convergen son factibles, por lo que existe la posibilidad de que la heurística este
+  encontrando una solución óptima para las instancias con las que se trabajaron;
+  sin embargo, eso no lo podemos comprobar. 
+
+  Algo que también hay que observar es que en instancias como Canada y la Ciudad de 
+  México, pareciera que los parametros no tienen tanto impácto en el resultado que 
+  se obtiene. Pues a pesar de que en algunos experimentos el lote y la temperatura 
+  fueran muy bajos, se siguió consiguiendo el mismo costo factible que se conseguía
+  con los demás parametros. Dando a entender que para instancias pequeñas, incluso
+  con bajas temperaturas y un lote pequeño, la heurística puede encontrar \tit{muy 
+  buenas} soluciones. Por otro lado, para las instancias basadas en México y en 
+  Estados Unidos, sí se logra percibir un cambio con ciertos parametros. 
+  Extrañamente vuelve a ocurrir lo anterior en donde parametros pequeños logran 
+  encontrar una solución incluso mejor que aquellas que se encuentran con parametros
+  más grandes; lo cual puede indicar que el número de semillas con las que se probaron
+  los parametros grandes fueron insuficientes para que pudiera hallar el óptimo ó 
+  fue más fácil que la heurística se quedara atorada en un mínimo local distinto 
+  del óptimo. 
+
   \section{Conclusión} \label{conclussion}
+
+  La heurística de aceptación por umbrales resultó ser una buena alternativa 
+  para encontrar una cubierta de vértices, en especial para instancias 
+  \tit{relativamente} pequeñas como con las que se probaron para este trabajo.
+  Tomando la principal ventaja de que incluso con parametros pequeños la heurística
+  encontraba soluciones óptimas, entonces econtrar soluciones óptimas para distintas
+  gráficas \tit{pequeñas} tampoco debería de consumir mucho tiempo o recursos para 
+  la computadora. Concluyendo así, que la heurística funciona excepcionalmente 
+  bien para gráficas planas cuya cantidad de vértices se encuentre entre 
+  10 y 50 junto y con una cantidad de aristas de hasta 100.
+
+  Como posible trabajo futuro, sería intersante ver qué tipo de comportamiento 
+  toma la heurística cuando se le pasa una gráfica con una mayor cantidad de 
+  vértices y aristas y cuya estructura sea diferente a la de una gráfica plana.
+  Además de comparar el tipo de soluciones que se encuentran con distintas 
+  huerísticas al recocido simulado, o incluso ver compararla con el 
+  algoritmo glotón que también encuentra cubiertas.
+
+  \section*{Bibliografía} \label{biblio}
+
+  \begin{enumerate}
+    \item Cormen, Thomas H.; Leiserson, Charles E.; Rivest, Ronald L.; Stein, Clifford.
+      \tit{Introduction to Algorithms} (2da edición). MIT Press and McGraw-Hill.
+    \item Chakrabartil, Amit. \tit{Approximation Algorithms: Vertex Cover}. Computer
+      Science 105. Darthmout College.
+    \item Peláez Valdés, Canek; \tit{Notas del curso de Heurísticas de Optimización
+      Combinatoria, capítulo 2}.
+  \end{enumerate}
   
 \end{document}
